@@ -30,7 +30,7 @@ void setup()
   createHashmaps(); //Create the objects for each note
   initializeMelodyArray(); //Create array for the melody
   volume(trumpetVolume, pianoVolume, bassVolume, drumsVolume, pianoNotesVolume); //Set volume assuming computer supports volume
-  currentScale = "majorC";
+  currentScale = "majorC"; //Don't use blues scales
   currentChord = "C";
 }
 

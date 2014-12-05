@@ -1,6 +1,6 @@
 int spacingBetweenLines = 30;
-int smallestX = 100;
-int lowestLine = 450;
+int smallestX = 50;
+int lowestLine = 500;
 int lengthOfLine = 400;
 int xPosition = smallestX + spacingBetweenLines;
 int xReset = smallestX + spacingBetweenLines;
@@ -43,14 +43,14 @@ void addScale()
         {
           j = j + 1;
           addNote(xPosition, lowestLine - (j * (spacingBetweenLines/4)) + C3Position);
-          println("There was an F or B");
+//          println("There was an F or B");
         }
         else
         {
           addNote(xPosition, lowestLine - (j * (spacingBetweenLines/4)) + C3Position);
         }
         xPosition = xPosition + spacingBetweenLines + spacingBetweenNotes;
-        println(j);
+//        println(j);
       }
     }
   }
