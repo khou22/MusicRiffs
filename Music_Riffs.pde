@@ -19,6 +19,8 @@ boolean bassOn = true;
 boolean saxOn = false;
 boolean melodyOn = true;
 boolean chordsOn = true;
+boolean random = true;
+boolean mute = false;
 String currentScale;
 String currentChord;
 
@@ -30,6 +32,7 @@ void setup()
   createHashmaps(); //Create the objects for each note
   initializeMelodyArray(); //Create array for the melody
   volume(trumpetVolume, pianoVolume, bassVolume, drumsVolume, pianoNotesVolume); //Set volume assuming computer supports volume
+  initialInstruments(); //Turn on certain instruments
   currentScale = "majorC"; //Don't use blues scales
   currentChord = "C";
 }

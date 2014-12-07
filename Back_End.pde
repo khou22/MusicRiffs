@@ -4,6 +4,9 @@ boolean playNote;
 boolean endOfMelody = false;
 boolean randomMelody = true;
 boolean changeChord = false;
+float possibleRythems[] = {.25, .5, 1}; //Possible rythems
+int beatsRemaing = 4;
+int notesPerRandom = 8;
 
 void randomRiff()
 {
@@ -11,30 +14,48 @@ void randomRiff()
   {
     melody.clear(); //Refresh melody array
     rythem.clear(); //Refresh rythem array
-    riff = int(random(0, allRiffs.length));
-    println("The random number of the riff generated was: " + riff);
-    octave = octaves[int(random(0, octaves.length))];
-    println("The random number of the octave generated was: " + octave);
-//    riff = 1; //For debugging purposes don't use random
-//    octave = 3; //^
-//    println(allRiffs[riff][0].length); //Debugging
-    for (int i = 0; i < allRiffs[riff][0].length; i++)
+    if (!random)
     {
-      String[] scale = scaleMap.get(currentScale); //Get current scale
-      rythem.add(allRiffs[riff][1][i]);
-      int numInScale = int(allRiffs[riff][0][i]) - 1; //To offset that arrays begin with 0
-      if (numInScale == -1)
+      riff = int(random(0, allRiffs.length));
+      println("The random number of the riff generated was: " + riff);
+      octave = octaves[int(random(0, octaves.length))];
+      println("The random number of the octave generated was: " + octave);
+  //    riff = 1; //For debugging purposes don't use random
+  //    octave = 3; //^
+  //    println(allRiffs[riff][0].length); //Debugging
+      for (int i = 0; i < allRiffs[riff][0].length; i++)
       {
-        melody.add("~"); //Symbolic of rest
+        String[] scale = scaleMap.get(currentScale); //Get current scale
+        rythem.add(allRiffs[riff][1][i]);
+        int numInScale = int(allRiffs[riff][0][i]) - 1; //To offset that arrays begin with 0
+        if (numInScale == -1)
+        {
+          melody.add("~"); //Symbolic of rest
+        }
+        else
+        {
+          String note = scale[numInScale] + str(octave);
+          melody.add(note); //Use the number in the scale for the melody
+        }
       }
-      else
-      {
-        String note = scale[numInScale] + str(octave);
-        melody.add(note); //Use the number in the scale for the melody
-      }
+      randomMelody = false; //Don't generate melody until next run through
+      endOfMelody = false;
     }
-    randomMelody = false; //Don't generate melody until next run through
-    endOfMelody = false;
+    else //If not random melody
+    {
+      octave = octaves[int(random(0, octaves.length))];
+      println("The random number of the octave generated was: " + octave);
+      String[] scale = scaleMap.get(currentScale); //Get current scale
+      for (int i = 0; i < notesPerRandom; i++)
+      {
+        int m = int(random(0, scale.length));
+        int r = int(random(0, possibleRythems.length));
+        melody.add(scale[m] + octave);
+        rythem.add(possibleRythems[r]);
+      }
+      randomMelody = false; //Don't generate melody until next run through
+      endOfMelody = false;
+    }
   }
 }
 
@@ -84,7 +105,6 @@ void checkEndOfMelody()
     endOfMelody = true;
     randomMelody = true; //New melody
     changeChord = true; //New chord
-//    exit(); //Quit
   }
 }
 
@@ -99,15 +119,23 @@ void playNote(String note, float beats) //Declare note and duration
   }
   else
   {
-//    println("Will play note: " + note + " for: " + beats + " beats");
-    noteMap.get(note).play(beats);
+    println("Will play note: " + note + " for: " + beats + " beats");
+    if (!mute)
+    {
+      noteMap.get(note).play(beats);
+    }
   }
   playNote = false; //Don't allow repeat of note
 }
 
 void playChord(String chord, float beats)
 {
-  chordMap.get(chord).play(beats);
+  println("The mute variable is: " + mute);
+  if (mute == false)
+  {
+    println("The mute variable was analyzed as false");
+    chordMap.get(chord).play(beats);
+  }
 }
 
 void volume(int t, int p, int b, int d, int pn)
@@ -146,4 +174,18 @@ void changeChordTone()
     println("Current scale is: " + currentScale);
     changeChord = false;
   }
+}
+
+void initialInstruments()
+{
+  trumpetOn = true;
+  pianoChordsOn = true;
+  pianoNotesOn = true;
+  drumsOn = true;
+  bassOn = true;
+  saxOn = false;
+  melodyOn = true;
+  chordsOn = true;
+  random = true;
+  mute = false;
 }

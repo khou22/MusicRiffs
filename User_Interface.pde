@@ -5,6 +5,11 @@ int offset = 10;
 int lineSpacing = 25;
 int buttonSizeX = 150;
 int buttonSizeY = 75;
+int booleanSizeX = 175;
+int booleanSizeY = 500;
+int booleanTopY = offset;
+int booleanLeftX = 1000;
+int booleanLineSpacing = 30;
 
 void setupWindow()
 {
@@ -19,6 +24,7 @@ void userInterface()
 //  refresh();
   sheetMusic();
   displayMelodyInfo();
+  displayBooleans();
   chooseScaleAndChord();
 }
 
@@ -33,11 +39,50 @@ void displayMelodyInfo()
   fill(255); //For rectangle
   rect(offset, offset, (4 * width)/10, height/4);
   fill(0); //Black font color
-  text("Riff ID: " + (riff + 1), offset + 5, offset + 20);
+  if (random) //Random melody
+  {
+    text("Riff ID: Random", offset + 5, offset + 20);
+  }
+  else //Not random melody
+  {
+    text("Riff ID: " + (riff + 1), offset + 5, offset + 20);
+  }
   text("Melody: " + melody, offset + 5, offset + 20 + lineSpacing);
   text("Rythem: " + rythem, offset + 5, offset + 20 + (2 * lineSpacing));
   text("Chord: " + currentChord, offset + 5, offset + 20 + (3 * lineSpacing));
   text("Scale: " + currentScale, offset + 5, offset + 20 + (4 * lineSpacing));
+}
+
+void displayBooleans()
+{
+  textFont(defaultFont);
+  fill(255); //Rectangle
+  rect(booleanLeftX, booleanTopY, booleanSizeX, booleanSizeY);
+  int x = booleanLeftX + offset;
+  int y = booleanTopY + (2 * offset);
+  fill(0);
+  textConditionals(melodyOn, "Melody", x, y);
+  textConditionals(chordsOn, "Chords", x, y + (booleanLineSpacing));
+  textConditionals(trumpetOn, "Trumpet", x, y + (2 * booleanLineSpacing));
+  textConditionals(pianoChordsOn, "Piano Chords", x, y + (3 * booleanLineSpacing));
+  textConditionals(saxOn, "Sax", x, y + (4 * booleanLineSpacing));
+  textConditionals(bassOn, "Bass", x, y + (5 * booleanLineSpacing));
+  textConditionals(pianoNotesOn, "Piano Notes", x, y + (6 * booleanLineSpacing));
+  textConditionals(drumsOn, "Drums", x, y + (7 * booleanLineSpacing));
+  textConditionals(random, "Random Melody", x, y + (8 * booleanLineSpacing));
+  textConditionals(mute, "Mute", x, y + (9 * booleanLineSpacing));
+}
+
+void textConditionals(boolean input, String label, int x, int y)
+{
+  if (input) //True
+  {
+    text(label + " = True", x, y);
+  }
+  else //False
+  {
+    text(label + " = False", x, y);
+  }
 }
 
 void addInstrumentButtons()
@@ -53,6 +98,13 @@ void addInstrumentButtons()
     .setValue(0)
     .setLabel("Chords")
     .setPosition((4 * width)/10 + (3 * offset) + buttonSizeX, 10)
+    .setSize(buttonSizeX, buttonSizeY)
+    ;
+    
+  cp5.addButton("randomButton")
+    .setValue(0)
+    .setLabel("Random")
+    .setPosition((4 * width)/10 + (4 * offset) + (2 * buttonSizeX), 10)
     .setSize(buttonSizeX, buttonSizeY)
     ;
     
@@ -95,6 +147,13 @@ void addInstrumentButtons()
     .setValue(0)
     .setLabel("Drums")
     .setPosition((7 * offset) + (5 * buttonSizeX), 10 + ((height/4) + (3 * offset)))
+    .setSize(buttonSizeX, buttonSizeY)
+    ;
+  
+  cp5.addButton("muteButton")
+    .setValue(0)
+    .setLabel("Mute")
+    .setPosition(width - buttonSizeX - offset, height - buttonSizeY - offset)
     .setSize(buttonSizeX, buttonSizeY)
     ;
 }
@@ -192,5 +251,29 @@ void drumsButton()
   else
   {
     drumsOn = true;
+  }
+}
+
+void randomButton()
+{
+  if (random)
+  {
+    random = false;
+  }
+  else
+  {
+    random = true;
+  }
+}
+
+void muteButton()
+{
+  if (mute)
+  {
+    mute = false;
+  }
+  else
+  {
+    mute = true;
   }
 }

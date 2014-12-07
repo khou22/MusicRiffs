@@ -13,8 +13,16 @@ int noteStemLength = 60;
 void sheetMusic()
 {
   refresh();
+  addText();
   addLines();
   addScale();
+}
+
+void addText()
+{
+  fill(0);
+  textFont(headerFont);
+  text("Notes in the scale (doesn't work with sharps and flats yet)", smallestX, lowestLine - (spacingBetweenLines * 5)); //Title
 }
 
 void addLines()

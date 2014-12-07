@@ -62,4 +62,8 @@ float melody7[] = {3, 4, 5, 7, 5, 7, 5, 7, 5};
 float rythem7[] = {.5, .25, .25, .5, .5, .5, .5, .5, .5};
 float seven[][] = {melody7, rythem7};
 
-float allRiffs[][][] = {one, two, three, four, five, six, seven};
+float melody8[] = {3, 2, 1, 2, 3, 3, 3};
+float rythem8[] = {.5, .5, .5, .5, .5, .5, 1};
+float eight[][] = {melody8, rythem8};
+
+float allRiffs[][][] = {one, two, three, four, five, six, seven, eight};

@@ -18,6 +18,7 @@ AudioPlayer jazzDrums180;
 //Fonts
 PFont defaultFont;
 PFont buttonFont;
+PFont headerFont;
 
 //Hashmaps
 HashMap<String, Note> noteMap = new HashMap<String, Note>(); //Hashmap
@@ -179,4 +180,5 @@ void createFonts()
 {
   defaultFont = createFont("Times New Roman", 16);
   buttonFont = createFont("Cambria", 26);
+  headerFont = createFont("Arial", 16);
 }
