@@ -31,6 +31,7 @@ String allChords[] = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb"
 String noteNames[] = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"};
 String[][] allScales = {majorC, majorDb, majorD, majorEb, majorE, majorF, majorGb, majorG, majorAb, majorA, majorBb, majorB, CBlues, DbBlues, DBlues, EbBlues, EBlues, FBlues, GbBlues, GBlues}; //All chord scales
 String[] allScaleNames = {"majorC", "majorDb", "majorD", "majorEb", "majorE", "majorF", "majorGb", "majorG", "majorAb", "majorA", "majorBb", "majorB", "CBlues", "DbBlues", "DBlues", "EbBlues", "EBlues", "FBlues", "GbBlues", "GBlues"}; //All chord scale names in same order
+String[] usableScaleNames = {"majorC", "majorDb", "majorD", "majorEb", "majorE", "majorF", "majorGb", "majorG", "majorAb", "majorA", "majorBb", "majorB"};
 
 //***************************** Riffs ************************************
 //Riffs in accordance with riff guide I got from Joe (0 is a rest)

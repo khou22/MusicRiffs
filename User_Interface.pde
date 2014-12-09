@@ -10,6 +10,8 @@ int booleanSizeY = 500;
 int booleanTopY = offset;
 int booleanLeftX = 1000;
 int booleanLineSpacing = 30;
+int currentInt = 0;
+int sliderWidth = 300;
 
 void setupWindow()
 {
@@ -155,6 +157,14 @@ void addInstrumentButtons()
     .setLabel("Mute")
     .setPosition(width - buttonSizeX - offset, height - buttonSizeY - offset)
     .setSize(buttonSizeX, buttonSizeY)
+    ;
+    
+  cp5.addSlider("currentInt")
+    .setPosition((((4 * width)/10) + (3 * offset)), buttonSizeY + (4 * offset))
+    .setWidth(sliderWidth)
+    .setLabel("Current Scale Number")
+    .setRange(0, usableScaleNames.length)
+    .setNumberOfTickMarks(usableScaleNames.length)
     ;
 }
 

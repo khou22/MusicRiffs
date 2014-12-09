@@ -168,8 +168,15 @@ void changeChordTone()
   if (changeChord)
   {
     currentChordNum++; //Next chord
+    currentInt = chordProgressionSequence[currentChordNum];
     currentScale = allScaleNames[chordProgressionSequence[currentChordNum]];
     currentChord = allChords[chordProgressionSequence[currentChordNum]];
+    if (random)
+    {
+      currentInt = int(random(0, allChords.length));
+      currentScale = allScaleNames[currentInt];
+      currentChord = allChords[currentInt];
+    }
     println("Current chord is: " + currentChord);
     println("Current scale is: " + currentScale);
     changeChord = false;
@@ -186,6 +193,12 @@ void initialInstruments()
   saxOn = false;
   melodyOn = true;
   chordsOn = true;
-  random = true;
+  random = false;
   mute = false;
+}
+
+void changeCurrent(int i)
+{
+  currentScale = usableScaleNames[i];
+  currentChord = allChords[i];
 }
