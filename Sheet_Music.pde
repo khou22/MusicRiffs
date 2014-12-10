@@ -9,6 +9,7 @@ int spacingBetweenNotes = 20;
 int widthOfNote = (3 * spacingBetweenLines)/4;
 int heightOfNote = spacingBetweenLines;
 int noteStemLength = 60;
+String nonFlats[] = {"C", "D", "E", "F", "G", "A", "B"};
 
 void sheetMusic()
 {
@@ -21,8 +22,8 @@ void sheetMusic()
 void addText()
 {
   fill(0);
-  textFont(headerFont);
-  text("Notes in the scale (doesn't work with sharps and flats yet)", smallestX, lowestLine - (spacingBetweenLines * 5)); //Title
+  textFont(sheetMusicTitle);
+  text("Notes in the Scale", smallestX, lowestLine - (spacingBetweenLines * 5)); //Title
 }
 
 void addLines()
@@ -41,32 +42,44 @@ void addScale()
   String array[] = scaleMap.get(currentScale);
   for (int i = 0; i < array.length; i++)
   {
-    String value = array[i] + "3";
-    for (int j = 0; j < allNotes.length; j++)
+    String value = array[i];
+    for (int j = 0; j < nonFlats.length; j++)
     {
-//      println("Does " + value + " equal " + allNotes[j]); //Debugging
-      if (value.equals(allNotes[j]))
+      if (value.equals(nonFlats[j])) //Equals a non flat
       {
-        if (value.equals("F3") || value.equals("B3"))
+        addNote(xPosition, lowestLine + spacingBetweenLines - (j * (spacingBetweenLines/2)), nonFlats[j]);
+      }
+      else //Equals a flat
+      {
+        if (value.substring(0, 1).equals(nonFlats[j]))
         {
-          j = j + 1;
-          addNote(xPosition, lowestLine - (j * (spacingBetweenLines/4)) + C3Position);
-//          println("There was an F or B");
+          addNote(xPosition, lowestLine + spacingBetweenLines - (j * (spacingBetweenLines/2)), nonFlats[j]);
+          addFlat(xPosition, lowestLine + spacingBetweenLines - (j * (spacingBetweenLines/2)));
         }
-        else
-        {
-          addNote(xPosition, lowestLine - (j * (spacingBetweenLines/4)) + C3Position);
-        }
-        xPosition = xPosition + spacingBetweenLines + spacingBetweenNotes;
-//        println(j);
       }
     }
-  }
+    xPosition = xPosition + spacingBetweenLines + spacingBetweenNotes;
+  }  
 }
 
-void addNote(int x, int y)
+void addNote(int x, int y, String note)
 {
   fill(0); //Black notes
   ellipse(x, y, widthOfNote, heightOfNote);
   line(x + (widthOfNote/2), y, x + (widthOfNote/2), y - noteStemLength);
+  println(note);
+  if (note.equals("C"))
+  {
+    strokeWeight(5);
+    line(x - widthOfNote, y, x + widthOfNote, y);
+  }
+  strokeWeight(3); //Reset stroke weight
+}
+
+void addFlat(int x, int y)
+{
+  fill(0);
+  textFont(flatFont);
+  println("Printed flat symbol");
+  text("b", x + offset + 5, y + 10);
 }

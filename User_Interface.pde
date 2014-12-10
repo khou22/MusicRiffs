@@ -39,7 +39,7 @@ void displayMelodyInfo()
 {
   textFont(defaultFont);
   fill(255); //For rectangle
-  rect(offset, offset, (4 * width)/10, height/4);
+  rect(offset, offset, (4 * width)/10, height/4 + lineSpacing);
   fill(0); //Black font color
   if (random) //Random melody
   {
@@ -53,6 +53,12 @@ void displayMelodyInfo()
   text("Rythem: " + rythem, offset + 5, offset + 20 + (2 * lineSpacing));
   text("Chord: " + currentChord, offset + 5, offset + 20 + (3 * lineSpacing));
   text("Scale: " + currentScale, offset + 5, offset + 20 + (4 * lineSpacing));
+  String scaleString = "";
+  for (int i = 0; i < scaleMap.get(currentScale).length; i++)
+  {
+    scaleString = scaleString + scaleMap.get(currentScale)[i] + " ";
+  }
+  text("Scale Notes: " + scaleString, offset + 5, offset + 20 + (5 * lineSpacing));
 }
 
 void displayBooleans()
@@ -163,8 +169,8 @@ void addInstrumentButtons()
     .setPosition((((4 * width)/10) + (3 * offset)), buttonSizeY + (4 * offset))
     .setWidth(sliderWidth)
     .setLabel("Current Scale Number")
-    .setRange(0, usableScaleNames.length)
-    .setNumberOfTickMarks(usableScaleNames.length)
+    .setRange(0, usableScaleNames.length - 1)
+    .setNumberOfTickMarks(usableScaleNames.length - 1)
     ;
 }
 
