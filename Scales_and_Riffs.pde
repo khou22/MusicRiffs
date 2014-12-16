@@ -1,3 +1,4 @@
+//Music "theory" - Scales, chords, progressions, riffs to play
 //***************************** Chord scales ************************************
 String majorC[] = {"C", "D", "E", "F", "G", "A", "B"};
 String majorDb[] = {"Db", "Eb", "F", "Gb", "Ab", "Bb", "C"};

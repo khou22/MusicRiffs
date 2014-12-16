@@ -1,3 +1,4 @@
+//User interface and buttons
 import controlP5.*;
 ControlP5 cp5;
 
@@ -19,15 +20,21 @@ void setupWindow()
   background(backgroundColor);
   cp5 = new ControlP5(this);
   addInstrumentButtons();
+  cp5.controller("backButton").hide();
 }
 
 void userInterface()
 {
 //  refresh();
-  sheetMusic();
-  displayMelodyInfo();
-  displayBooleans();
-  chooseScaleAndChord();
+  if (!infoScreen)
+  {
+    sheetMusic();
+    displayMelodyInfo();
+    displayBooleans();
+    chooseScaleAndChord();
+    showButtons();
+    cp5.controller("backButton").hide();
+  }
 }
 
 void refresh()
@@ -76,9 +83,9 @@ void displayBooleans()
   textConditionals(saxOn, "Sax", x, y + (4 * booleanLineSpacing));
   textConditionals(bassOn, "Bass", x, y + (5 * booleanLineSpacing));
   textConditionals(pianoNotesOn, "Piano Notes", x, y + (6 * booleanLineSpacing));
-  textConditionals(drumsOn, "Drums", x, y + (7 * booleanLineSpacing));
-  textConditionals(random, "Random Melody", x, y + (8 * booleanLineSpacing));
-  textConditionals(mute, "Mute", x, y + (9 * booleanLineSpacing));
+//  textConditionals(drumsOn, "Drums", x, y + (7 * booleanLineSpacing));
+  textConditionals(random, "Random Melody", x, y + (7 * booleanLineSpacing));
+  textConditionals(mute, "Mute", x, y + (8 * booleanLineSpacing));
 }
 
 void textConditionals(boolean input, String label, int x, int y)
@@ -93,7 +100,7 @@ void textConditionals(boolean input, String label, int x, int y)
   }
 }
 
-void addInstrumentButtons()
+void addInstrumentButtons() //Add all the buttons
 {
   cp5.addButton("melodyButton")
     .setValue(0)
@@ -151,17 +158,24 @@ void addInstrumentButtons()
     .setSize(buttonSizeX, buttonSizeY)
     ;
     
-  cp5.addButton("drumsButton")
-    .setValue(0)
-    .setLabel("Drums")
-    .setPosition((7 * offset) + (5 * buttonSizeX), 10 + ((height/4) + (3 * offset)))
-    .setSize(buttonSizeX, buttonSizeY)
-    ;
+//  cp5.addButton("drumsButton")
+//    .setValue(0)
+//    .setLabel("Drums")
+//    .setPosition((7 * offset) + (5 * buttonSizeX), 10 + ((height/4) + (3 * offset)))
+//    .setSize(buttonSizeX, buttonSizeY)
+//    ;
   
   cp5.addButton("muteButton")
     .setValue(0)
     .setLabel("Mute")
     .setPosition(width - buttonSizeX - offset, height - buttonSizeY - offset)
+    .setSize(buttonSizeX, buttonSizeY)
+    ;
+  
+  cp5.addButton("infoScreen")
+    .setValue(1)
+    .setLabel("What's Going On")
+    .setPosition(booleanLeftX + offset, booleanTopY + (2 * offset) + (10 * booleanLineSpacing))
     .setSize(buttonSizeX, buttonSizeY)
     ;
     
@@ -171,6 +185,13 @@ void addInstrumentButtons()
     .setLabel("Current Scale Number")
     .setRange(0, usableScaleNames.length - 1)
     .setNumberOfTickMarks(usableScaleNames.length - 1)
+    ;
+    
+  cp5.addButton("backButton")
+    .setValue(0)
+    .setLabel("Back")
+    .setPosition(25, 25)
+    .setSize(75, 50)
     ;
 }
 
@@ -258,17 +279,17 @@ void pianoChordsButton()
   }
 }
 
-void drumsButton()
-{
-  if (drumsOn)
-  {
-    drumsOn = false;
-  }
-  else
-  {
-    drumsOn = true;
-  }
-}
+//void drumsButton()
+//{
+//  if (drumsOn)
+//  {
+//    drumsOn = false;
+//  }
+//  else
+//  {
+//    drumsOn = true;
+//  }
+//}
 
 void randomButton()
 {
@@ -291,5 +312,29 @@ void muteButton()
   else
   {
     mute = true;
+  }
+}
+
+void infoScreen()
+{
+  if (infoScreen)
+  {
+    infoScreen = false;
+  }
+  else
+  {
+    infoScreen = true;
+  }
+}
+
+void backButton()
+{
+  if (infoScreen)
+  {
+    infoScreen = false;
+  }
+  else
+  {
+    infoScreen = true;
   }
 }

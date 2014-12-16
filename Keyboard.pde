@@ -1,3 +1,4 @@
+//Drawing the keyboard with the highlighted keys
 int startingX = 550;
 int startingY = 350;
 int whiteKeyWidth = 60;
@@ -59,7 +60,7 @@ void highlightSelected(int i)
     if (currentNote < melody.size())
     {
       String note = melody.get(currentNote).substring(0, melody.get(currentNote).length() - 1); //Delete last character (the octave integer)
-  //    println("The variable, note = " + note); 
+//      println("The variable, note = " + note); 
       if (note.equals(allNotesKeyboard[i]))
       {
         fill(highlightMelody); //Red

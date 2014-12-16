@@ -1,3 +1,4 @@
+//Backend (playing notes, etc.)
 int riff = 0;
 int octave = 0;
 boolean playNote;
@@ -8,7 +9,7 @@ float possibleRythems[] = {.25, .5, 1}; //Possible rythems
 int beatsRemaing = 4;
 int notesPerRandom = 8;
 
-void randomRiff()
+void randomRiff() //Generate random riff
 {
   if (randomMelody)
   {
@@ -59,7 +60,7 @@ void randomRiff()
   }
 }
 
-void playRiff()
+void playRiff() //Play the riff
 {
   if (!randomMelody)
   {
@@ -195,6 +196,7 @@ void initialInstruments()
   chordsOn = true;
   random = false;
   mute = false;
+  infoScreen = false;
 }
 
 void changeCurrent(int i)

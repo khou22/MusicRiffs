@@ -1,4 +1,5 @@
-//General
+//The backend variables that the user doesn't directly change
+//General Variables
 int beatsPerMeasure = 4;
 boolean hasVolume; //Not all computers can set volume
 
@@ -21,6 +22,7 @@ PFont buttonFont;
 PFont headerFont;
 PFont flatFont;
 PFont sheetMusicTitle;
+PFont infoFont;
 
 //Hashmaps
 HashMap<String, Note> noteMap = new HashMap<String, Note>(); //Hashmap
@@ -185,4 +187,5 @@ void createFonts()
   headerFont = createFont("Arial", 16);
   sheetMusicTitle = createFont("Arial", 32);
   flatFont = createFont("Arial", 32);
+  infoFont = createFont("Cambria", 14);
 }

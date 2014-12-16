@@ -1,3 +1,4 @@
+//The sheet music part of the program with the notes
 int spacingBetweenLines = 30;
 int smallestX = 50;
 int lowestLine = 500;
@@ -41,8 +42,10 @@ void addScale()
   xPosition = xReset;
   String array[] = scaleMap.get(currentScale);
   for (int i = 0; i < array.length; i++)
+//  for (int i = 0; i < melody.size(); i++)
   {
     String value = array[i];
+//    String value = melody.get(i);
     for (int j = 0; j < nonFlats.length; j++)
     {
       if (value.equals(nonFlats[j])) //Equals a non flat
@@ -67,7 +70,7 @@ void addNote(int x, int y, String note)
   fill(0); //Black notes
   ellipse(x, y, widthOfNote, heightOfNote);
   line(x + (widthOfNote/2), y, x + (widthOfNote/2), y - noteStemLength);
-  println(note);
+//  println(note);
   if (note.equals("C"))
   {
     strokeWeight(5);
@@ -80,6 +83,6 @@ void addFlat(int x, int y)
 {
   fill(0);
   textFont(flatFont);
-  println("Printed flat symbol");
+//  println("Printed flat symbol");
   text("b", x + offset + 5, y + 10);
 }
